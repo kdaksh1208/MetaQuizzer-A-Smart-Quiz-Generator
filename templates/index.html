@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaQuizzer - Create & Learn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">Q</div>
+                <div class="logo-text">
+                    <h1>MetaQuizzer</h1>
+                    <p>Create & Learn</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span style="margin-right: 15px; font-weight: 500; color: #666;">👤 {{ username }}</span>
+                <a href="{{ url_for('logout') }}" class="icon-btn" title="Logout">🚪</a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Section: Quiz Generator -->
+            <section class="quiz-section" id="quizInputSection">
+                <div class="section-card">
+                    <h2>+ Generate New Quiz</h2>
+                    <p class="subtitle">Enter your topic and content to create an interactive quiz with AI</p>
+                    
+                    <div class="form-group">
+                        <label>Quiz Topic</label>
+                        <input type="text" id="topicInput" placeholder="e.g., World History, JavaScript Basics, Biology..." class="input-field">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Content for Quiz</label>
+                        <textarea id="contentInput" placeholder="Paste your study material, notes, or any content you want to turn into quiz questions..." class="textarea-field"></textarea>
+                    </div>
+                    
+                    <button id="generateBtn" class="primary-btn">
+                        <span>🤖</span> Generate Quiz with AI
+                    </button>
+                </div>
+
+                <!-- Recent Quizzes Section (Optional) -->
+                <div class="section-card" style="margin-top: 20px;">
+                    <h2>📚 Recent Quizzes</h2>
+                    <p class="subtitle">Your quiz history will appear here</p>
+                </div>
+            </section>
+
+            <!-- Quiz Taking Section (Hidden Initially) -->
+            <section class="quiz-section" id="quizActiveSection" style="display: none;">
+                <div class="section-card quiz-active-card">
+                    <div class="quiz-header">
+                        <span class="quiz-number">Question <span id="currentQuestionNum">1</span>/10</span>
+                        <span class="difficulty-badge easy" id="difficultyBadge">Easy</span>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                    </div>
+                    
+                    <h3 id="questionText">Loading question...</h3>
+                    
+                    <div class="options-container" id="optionsContainer">
+                        <!-- Options will be dynamically added -->
+                    </div>
+                    
+                    <button id="submitAnswerBtn" class="primary-btn" disabled>Submit Answer</button>
+                    
+                    <div class="feedback" id="feedbackSection" style="display: none;">
+                        <p id="feedbackText"></p>
+                        <button id="nextQuestionBtn" class="secondary-btn">Next Question →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section (Hidden Initially) -->
+            <section class="quiz-section" id="resultsSection" style="display: none;">
+                <div class="section-card results-card">
+                    <h2>🎉 Quiz Completed!</h2>
+                    <div class="results-stats">
+                        <div class="result-item">
+                            <span class="result-label">Final Score:</span>
+                            <span class="result-value" id="finalScore">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Average:</span>
+                            <span class="result-value" id="finalAverage">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Time Taken:</span>
+                            <span class="result-value" id="finalTime">0m</span>
+                        </div>
+                    </div>
+                    <button id="newQuizBtn" class="primary-btn">Start New Quiz</button>
+                </div>
+            </section>
+
+            <!-- Right Section: Stats Dashboard -->
+            <aside class="stats-section">
+                <div class="stat-card stat-blue">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-content">
+                        <h3 id="totalScore">0</h3>
+                        <p>Total Score</p>
+                    </div>
+                </div>
+
+                <div class="stat-card stat-orange">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <h3 id="averageScore">0%</h3>
+                        <p>Average Score</p>
+                    </div>
+                </div>
+
+                <div class="stat-card stat-yellow">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-content">
+                        <h3 id="flashcardSets">0</h3>
+                        <p>Flashcard Sets</p>
+                    </div>
+                </div>
+
+                <div class="stat-card stat-green">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-content">
+                        <h3 id="studyTime">0h</h3>
+                        <p>Study Time</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
